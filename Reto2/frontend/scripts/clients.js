@@ -1,9 +1,9 @@
 const CLIENT_URL =
   "https://g22fea38c9b9675-pauce3v7xj8epmdn.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/client/client";
 
-showData();
+showClientsData();
 // GET HTTP method for show all clients
-function showData() {
+function showClientsData() {
   $.ajax({
     url: CLIENT_URL,
     type: "GET",
@@ -13,7 +13,6 @@ function showData() {
       $("#tableContent").empty();
       for (let index = 0; index < clients.items.length; index++) {
         const element = clients.items[index];
-        console.log(element);
         let tr =
           "<tr><td>" +
           element.id +
@@ -29,7 +28,7 @@ function showData() {
           ")'" +
           ">Actualizar</button>" +
           "</td><td>" +
-          "<button onclick='deleteData(" +
+          "<button onclick='deleteClientsData(" +
           element.id +
           ")'>Eliminar</button>" +
           "</td></tr>";
@@ -45,7 +44,7 @@ function showData() {
 }
 
 // POST HTTP method for insert a new client
-function saveData() {
+function saveClientsData() {
   let id = $("#idClient").val();
   let name = $("#nameClient").val();
   let mail = $("#mailClient").val();
@@ -83,7 +82,7 @@ function saveData() {
 // PUT HTTP method for update a client
 // TODO: Corregir y pensar el flujo de este mismo, no funciona el paso
 // de variables al momento de cambiar ventana
-function updateData(data) {
+function updateClientsData(data) {
   window.location.assign("../templates/actualizacionClientes.html");
   console.log(data);
 
@@ -97,7 +96,7 @@ function updateData(data) {
 }
 
 //DELETE HTTP method for delete a client
-function deleteData(id) {
+function deleteClientsData(id) {
   let data = {
     id: id,
   };
@@ -117,7 +116,7 @@ function deleteData(id) {
       alert("ha sucedido un problema");
     },
     complete: function () {
-      showData();
+      showClientsData();
     },
   });
 }

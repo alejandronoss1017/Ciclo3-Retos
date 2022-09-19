@@ -9,32 +9,64 @@
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"
     ></script>
     <script type="text/javascript" src="./scripts/clients.js"></script>
-    <title>Leaderboard</title>
+    <script src="./scripts/audience.js"></script>
+    <title>Dashboard</title>
   </head>
   <body>
-    <h1>Elige tu opcion:</h1>
+    <h1>Bienvenido al dashboard</h1>
+    <p>
+      Aqui podras consultar, modificar y eliminar los datos de los clientes,
+      auditorios y mensajes.
+    </p>
     <ul>
-      <li>
-        <a href="./templates/creacionAuditorios.html">
-          Creacion de audirtorios</a
-        >
-      </li>
-      <li>
-        <a href="./templates/registroClientes.html"> Registro de clientes</a>
-      </li>
       <li>
         <a href="./templates/registroMensajes.html"> Registro de mensajes</a>
       </li>
     </ul>
-    <div id="listaClientes"></div>
-    <table>
-      <tr id="tableHeader">
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Edad</th>
-      </tr>
-      <tbody id="tableContent"></tbody>
-    </table>
+    <div id="listaClientes">
+      <h2>Clientes</h2>
+      <input
+        type="button"
+        value="Crear Cliente"
+        onclick="location.href='./templates/registroClientes.html'"
+      />
+      <table>
+        <tr id="tableHeader">
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Edad</th>
+        </tr>
+        <tbody id="tableContent"></tbody>
+      </table>
+    </div>
+    <div id="listaAuditorios">
+      <h2>Auditorios</h2>
+      <input
+        type="button"
+        value="Crear auditorio"
+        onclick="location.href='./templates/registroAuditorios.html'"
+      />
+      <table>
+        <tr id="tableHeaderAudience">
+          <th>ID</th>
+          <th>Dueño</th>
+          <th>Capacidad</th>
+          <th>Categoria</th>
+          <th>Nombre</th>
+        </tr>
+        <tbody id="tableContentAudience"></tbody>
+      </table>
+    </div>
+    <div id="listaMensajes">
+      <h2>Mensajes</h2>
+      <table>
+        <tr id="tableHeaderMessages">
+          <th>ID</th>
+          <th>Mensaje</th>
+        </tr>
+        <tbody id="tableContentMessage"></tbody>
+      </table>
+    </div>
   </body>
 </html>
