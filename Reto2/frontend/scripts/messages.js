@@ -3,6 +3,7 @@ const MESSAGE_URL =
 
 showMessageData();
 
+// GET HTTP method for show all messages
 function showMessageData() {
   $.ajax({
     url: MESSAGE_URL,
@@ -19,7 +20,7 @@ function showMessageData() {
           "</td><td>" +
           element.messagetext +
           "</td><td>" +
-          "<button onclick= 'updateData(" +
+          "<button onclick= 'putDataInputsMessage(" +
           JSON.stringify(element) +
           ")'" +
           ">Actualizar</button>" +
@@ -35,6 +36,7 @@ function showMessageData() {
   });
 }
 
+// POST HTTP method for insert a new message
 function saveMessageData() {
   let id = $("#idMessage").val();
   let text = $("#textMessage").val();
@@ -64,9 +66,48 @@ function saveMessageData() {
   });
 }
 
+//Set actual data in inputs to be modified
+function putDataInputsMessage(data) {
+  let row = `<label for="id">Id: </label>
+    <input type="number" id="updateMessageID" />
+    <label for="name">Mensaje: </label>
+        <textarea id="updateMessageText" cols="30" rows="1"></textarea>
+        <input type="submit" onclick="updateMessageData()" value="Confirmar" />`;
+  $("#updateMessage").append(row);
+  $("#updateMessageID").val(data.id);
+  $("#updateMessageText").val(data.messagetext);
+}
 
-function updateMessageData() {}
+// PUT HTTP method for update a message
+function updateMessageData() {
+  let id = $("#updateMessageID").val();
+  let text = $("#updateMessageText").val();
 
+  let newData = {
+    id: id,
+    messagetext: text,
+  };
+
+  $.ajax({
+    url: MESSAGE_URL,
+    type: "PUT",
+    data: JSON.stringify(newData),
+    contentType: "application/json",
+
+    success: function (message) {
+      alert("Mensaje Actualizado");
+    },
+    error: function (xhr, status) {
+      alert("Ha ocurrido un problema" + status);
+    },
+    complete: function (xhr, status) {
+      $("#updateMessage").empty();
+      showMessageData();
+    },
+  });
+}
+
+// DELETE HTTP method for delete a message
 function deleteMessageData(id) {
   let data = {
     id: id,

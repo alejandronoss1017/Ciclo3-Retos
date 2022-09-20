@@ -3,6 +3,7 @@ const AUDIENCE_URL =
 
 showAudienceData();
 
+// GET HTTTP method for show all audiences
 function showAudienceData() {
   $.ajax({
     url: AUDIENCE_URL,
@@ -25,7 +26,7 @@ function showAudienceData() {
           "</td><td>" +
           element.name +
           "</td><td>" +
-          "<button onclick= 'updateData(" +
+          "<button onclick= 'putDataInputsAudience(" +
           JSON.stringify(element) +
           ")'" +
           ">Actualizar</button>" +
@@ -45,6 +46,7 @@ function showAudienceData() {
   });
 }
 
+// POST HTTP method for insert a new audience
 function saveAudienceData() {
   let id = $("#idAudience").val();
   let owner = $("#ownerAudience").val();
@@ -66,13 +68,13 @@ function saveAudienceData() {
     data: JSON.stringify(newData),
     contentType: "application/json",
 
-    success: function (client) {
+    success: function (audience) {
       $("#idAudience").val("");
       $("#ownerAudience").val("");
       $("#capacityAudience").val("");
       $("#categoryIdAudience").val("");
       $("#nameAudience").val("");
-      alert("Cliente Guardado");
+      alert("Auditorio guardado");
     },
     error: function (xhr, status) {
       alert("Ha ocurrido un problema" + status);
@@ -83,9 +85,63 @@ function saveAudienceData() {
   });
 }
 
-// TODO: Lo mismo que en cliente, pensar el flujo y logica de como realizarlo
-function updateAudienceData() {}
+//Set actual data in inputs to be modified
+function putDataInputsAudience(data) {
+  let row = `<label for="id">Id: </label>
+        <input type="number" id="updateAudienceID" />
+        <label for="name">Dueño: </label>
+        <input type="text" id="updateAudienceOwner" />
+        <label for="mail">Capacidad: </label>
+        <input type="text" id="updateAudienceCapacity" />
+        <label for="age">Categoria: </label>
+        <input type="number" id="updateAudienceCategory" />
+        <label for="age">Nombre: </label>
+        <input type="text" id="updateAudienceName" />
+        <input type="submit" onclick="updateAudienceData()" value="Confirmar" />`;
+  $("#updateAudience").append(row);
+  $("#updateAudienceID").val(data.id);
+  $("#updateAudienceOwner").val(data.owner);
+  $("#updateAudienceCapacity").val(data.capacity);
+  $("#updateAudienceCategory").val(data.category_id);
+  $("#updateAudienceName").val(data.name);
+}
 
+//PUT HTTP method for update an audience
+function updateAudienceData() {
+  let id = $("#updateAudienceID").val();
+  let owner = $("#updateAudienceOwner").val();
+  let capacity = $("#updateAudienceCapacity").val();
+  let category_id = $("#updateAudienceCategory").val();
+  let name = $("#updateAudienceName").val();
+
+  let newData = {
+    id: id,
+    owner: owner,
+    capacity: capacity,
+    category_id: category_id,
+    name: name,
+  };
+
+  $.ajax({
+    url: AUDIENCE_URL,
+    type: "PUT",
+    data: JSON.stringify(newData),
+    contentType: "application/json",
+
+    success: function (audience) {
+      alert("Auditorio Actualizado");
+    },
+    error: function (xhr, status) {
+      alert("Ha ocurrido un problema" + status);
+    },
+    complete: function (xhr, status) {
+      $("#updateAudience").empty();
+      showAudienceData();
+    },
+  });
+}
+
+// DELETE HTTP method for delete an audience
 function deleteAudienceData(id) {
   let data = {
     id: id,

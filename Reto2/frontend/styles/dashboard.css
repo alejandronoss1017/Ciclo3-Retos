@@ -4,6 +4,16 @@ table{
     border-color: black;
 }
 
+
+
 #updateClient{
+    padding-top: 2%;
+}
+
+#updateAudience{
+    padding-top: 2%;
+}
+
+#updateMessage{
     padding-top: 2%;
 }

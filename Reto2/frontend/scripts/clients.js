@@ -2,8 +2,8 @@ const CLIENT_URL =
   "https://g22fea38c9b9675-pauce3v7xj8epmdn.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/client/client";
 
 showClientsData();
-// GET HTTP method for show all clients
 
+// GET HTTP method for show all clients
 function showClientsData() {
   $.ajax({
     url: CLIENT_URL,
@@ -24,7 +24,7 @@ function showClientsData() {
           "</td><td>" +
           element.age +
           "</td><td>" +
-          "<button onclick= 'putDataInputs(" +
+          "<button onclick= 'putDataInputsClients(" +
           JSON.stringify(element) +
           ")'" +
           ">Actualizar</button>" +
@@ -80,22 +80,31 @@ function saveClientsData() {
   });
 }
 
-function putDataInputs(data) {
+//Set actual data in inputs to be modified
+function putDataInputsClients(data) {
+  let row = `<label for="id">Id: </label>
+        <input type="number" id="updateClientID" />
+        <label for="name">Nombre: </label>
+        <input type="text" id="updateClientName" />
+        <label for="mail">Email: </label>
+        <input type="text" id="updateClientMail" />
+        <label for="age">Edad: </label>
+        <input type="number" id="updateClientAge" />
+        <input type="submit" onclick="updateClientsData()" value="Confirmar" />`;
+  $("#updateClient").append(row);
   $("#updateClientID").val(data.id);
   $("#updateClientName").val(data.name);
   $("#updateClientMail").val(data.email);
   $("#updateClientAge").val(data.age);
 }
+
 // PUT HTTP method for update a client
-// TODO: Corregir y pensar el flujo de este mismo, no funciona el paso
-// de variables al momento de cambiar ventana
-function updateClientsData(data) {
-  console.log(data);
+function updateClientsData() {
   let id = $("#updateClientID").val();
   let name = $("#updateClientName").val();
   let email = $("#updateClientMail").val();
   let age = $("#updateClientAge").val();
-  
+
   let newData = {
     id: id,
     name: name,
@@ -110,16 +119,13 @@ function updateClientsData(data) {
     contentType: "application/json",
 
     success: function (client) {
-      alert("Cliente Guardado");
+      alert("Cliente Actualizado");
     },
     error: function (xhr, status) {
       alert("Ha ocurrido un problema" + status);
     },
     complete: function (xhr, status) {
-      $("#idClient").val("");
-      $("#nameClient").val("");
-      $("#mailClient").val("");
-      $("#ageClient").val("");
+      $("#updateClient").empty();
       showClientsData();
     },
   });
