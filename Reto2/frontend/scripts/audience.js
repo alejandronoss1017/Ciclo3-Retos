@@ -103,7 +103,7 @@ function deleteAudienceData(id) {
       $("#edadCliente").val("");
     },
     error: function (xhr, status) {
-      alert("ha sucedido un problema");
+      alert("ha sucedido un problema" + status);
     },
     complete: function () {
       showAudienceData();

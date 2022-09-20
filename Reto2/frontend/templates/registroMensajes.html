@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    ></script>
+    <script type="text/javascript" src="../scripts/messages.js"></script>
+    <title>Registro de Mensajes</title>
+  </head>
+  <body>
+    <h1>Ingrese los siguientes datos:</h1>
+    <div>
+      <label for="id">ID: </label>
+      <input type="number" id="idMessage" />
+      <label for="name">Mensaje: </label>
+     <!--<input type="text"  id="textMessage"> -->
+      <textarea id="textMessage" cols="30" rows="1"></textarea>
+      <input type="submit" value="Enviar" onclick="saveMessageData()" />
+    </div>
+  </body>
 </html>

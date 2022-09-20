@@ -1,0 +1,9 @@
+table{
+    text-align: center;
+    border-collapse: collapse;
+    border-color: black;
+}
+
+#updateClient{
+    padding-top: 2%;
+}

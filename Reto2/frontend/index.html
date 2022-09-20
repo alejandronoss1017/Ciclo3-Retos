@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/dashboard.css" />
     <script
       type="text/javascript"
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"
     ></script>
-    <script type="text/javascript" src="./scripts/clients.js"></script>
+    <script src="./scripts/clients.js"></script>
     <script src="./scripts/audience.js"></script>
+    <script src="./scripts/messages.js"></script>
     <title>Dashboard</title>
   </head>
   <body>
@@ -18,11 +20,6 @@
       Aqui podras consultar, modificar y eliminar los datos de los clientes,
       auditorios y mensajes.
     </p>
-    <ul>
-      <li>
-        <a href="./templates/registroMensajes.html"> Registro de mensajes</a>
-      </li>
-    </ul>
     <div id="listaClientes">
       <h2>Clientes</h2>
       <input
@@ -30,7 +27,7 @@
         value="Crear Cliente"
         onclick="location.href='./templates/registroClientes.html'"
       />
-      <table>
+      <table border="1">
         <tr id="tableHeader">
           <th>ID</th>
           <th>Nombre</th>
@@ -39,6 +36,17 @@
         </tr>
         <tbody id="tableContent"></tbody>
       </table>
+      <div id="updateClient">
+        <label for="id">Id: </label>
+        <input type="number" id="updateClientID" />
+        <label for="name">Nombre: </label>
+        <input type="text" id="updateClientName" />
+        <label for="mail">Email: </label>
+        <input type="text" id="updateClientMail" />
+        <label for="age">Edad: </label>
+        <input type="number" id="updateClientAge" />
+        <input type="submit" onclick="" value="Confirmar" />
+      </div>
     </div>
     <div id="listaAuditorios">
       <h2>Auditorios</h2>
@@ -47,7 +55,7 @@
         value="Crear auditorio"
         onclick="location.href='./templates/registroAuditorios.html'"
       />
-      <table>
+      <table border="1">
         <tr id="tableHeaderAudience">
           <th>ID</th>
           <th>Dueño</th>
@@ -60,7 +68,12 @@
     </div>
     <div id="listaMensajes">
       <h2>Mensajes</h2>
-      <table>
+      <input
+        type="button"
+        value="Crear mensaje"
+        onclick="location.href='./templates/registroMensajes.html'"
+      />
+      <table border="1">
         <tr id="tableHeaderMessages">
           <th>ID</th>
           <th>Mensaje</th>

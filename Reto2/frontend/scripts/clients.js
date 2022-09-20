@@ -3,6 +3,7 @@ const CLIENT_URL =
 
 showClientsData();
 // GET HTTP method for show all clients
+
 function showClientsData() {
   $.ajax({
     url: CLIENT_URL,
@@ -23,7 +24,7 @@ function showClientsData() {
           "</td><td>" +
           element.age +
           "</td><td>" +
-          "<button onclick= 'updateData(" +
+          "<button onclick= 'putDataInputs(" +
           JSON.stringify(element) +
           ")'" +
           ">Actualizar</button>" +
@@ -79,20 +80,49 @@ function saveClientsData() {
   });
 }
 
+function putDataInputs(data) {
+  $("#updateClientID").val(data.id);
+  $("#updateClientName").val(data.name);
+  $("#updateClientMail").val(data.email);
+  $("#updateClientAge").val(data.age);
+}
 // PUT HTTP method for update a client
 // TODO: Corregir y pensar el flujo de este mismo, no funciona el paso
 // de variables al momento de cambiar ventana
 function updateClientsData(data) {
-  window.location.assign("../templates/actualizacionClientes.html");
   console.log(data);
+  let id = $("#updateClientID").val();
+  let name = $("#updateClientName").val();
+  let email = $("#updateClientMail").val();
+  let age = $("#updateClientAge").val();
+  
+  let newData = {
+    id: id,
+    name: name,
+    email: email,
+    age: age,
+  };
 
-  document.getElementById("updateClientID").innerText = data.id;
-  let id = document.getElementById("updateClientID");
-  let name = document.getElementById("updateClientName");
-  let mail = document.getElementById("updateClientMail");
-  let edad = document.getElementById("updateClientAge");
+  $.ajax({
+    url: CLIENT_URL,
+    type: "PUT",
+    data: JSON.stringify(newData),
+    contentType: "application/json",
 
-  id.value;
+    success: function (client) {
+      alert("Cliente Guardado");
+    },
+    error: function (xhr, status) {
+      alert("Ha ocurrido un problema" + status);
+    },
+    complete: function (xhr, status) {
+      $("#idClient").val("");
+      $("#nameClient").val("");
+      $("#mailClient").val("");
+      $("#ageClient").val("");
+      showClientsData();
+    },
+  });
 }
 
 //DELETE HTTP method for delete a client
