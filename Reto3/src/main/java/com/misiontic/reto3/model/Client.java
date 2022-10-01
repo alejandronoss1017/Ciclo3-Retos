@@ -10,7 +10,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "client")
-
 public class Client implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +36,14 @@ public class Client implements Serializable {
 
 	@Getter
 	@Setter
-
 	@OneToMany
 	@JoinColumn(name = "idMessage")
 	@JsonIgnoreProperties("client")
 	private List<Message> messages;
+
+	@Getter
+	@Setter
+	@OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "client")
+	@JsonIgnoreProperties("client")
+	private List<Reservation> reservations;
 }

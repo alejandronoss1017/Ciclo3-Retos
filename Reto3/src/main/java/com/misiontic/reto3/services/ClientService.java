@@ -18,7 +18,7 @@ public class ClientService {
         return clientRepository.getAll();
     }
 
-    public Optional<Client> getProduct(int id) {
+    public Optional<Client> getClient(int id) {
         return clientRepository.getClient(id);
     }
 

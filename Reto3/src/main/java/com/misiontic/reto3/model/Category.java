@@ -19,9 +19,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "category")
 public class Category implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Getter
     @Setter
     private Integer idCategory;
@@ -36,14 +36,14 @@ public class Category implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "category")
+    @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Audience> audiences;
 
-    @Getter
-    @Setter
-    @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "category")
-    @JsonIgnoreProperties("category")
-    private List<Reservation> reservations;
+    // @Getter
+    // @Setter
+    // @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "category")
+    // @JsonIgnoreProperties("category")
+    // private List<Reservation> reservations;
 
 }

@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
-import java.util.Locale.Category;
 
 @Entity
 @Table(name = "audience")
@@ -15,7 +15,6 @@ public class Audience implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Getter
     @Setter
     private Integer id;
@@ -28,9 +27,14 @@ public class Audience implements Serializable {
     @Setter
     private Integer capacity;
 
+    //! Error Critico a la hora de enlazar 
+    //! Las llaves foraneas
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    @JsonIgnoreProperties("audiences")
     @Getter
     @Setter
-    private Category category_id;
+    private Category category;
 
     @Getter
     @Setter
@@ -40,12 +44,18 @@ public class Audience implements Serializable {
     @Setter
     private String description;
 
+    @Getter
+    @Setter
     @ManyToOne
-    @JoinColumn(name = "idCategory")
-    @JsonIgnoreProperties("audiences")
-    private Category category;
+    @JoinColumn(name = "idMessage", nullable = true)
+    @JsonIgnoreProperties("audience")
+    private Message message;
 
-    // @ManyToOne
-    // private Message messages;
+    @ManyToOne
+    @JoinColumn(name = "idAudience")
+    @JsonIgnoreProperties("audience")
+    @Getter
+    @Setter
+    private Reservation reservation;
 
 }
