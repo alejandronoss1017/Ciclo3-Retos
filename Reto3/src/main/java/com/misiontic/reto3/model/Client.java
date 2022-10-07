@@ -20,11 +20,11 @@ public class Client implements Serializable {
 
 	@Getter
 	@Setter
-	private String name;
+	private String email;
 
 	@Getter
 	@Setter
-	private String email;
+	private String name;
 
 	@Getter
 	@Setter

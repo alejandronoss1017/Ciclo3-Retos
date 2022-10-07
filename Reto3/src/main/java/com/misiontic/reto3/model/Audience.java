@@ -23,7 +23,7 @@ public class Audience implements Serializable {
     @Getter
     @Setter
     private String name;
-    
+
     @Getter
     @Setter
     private String owner;
@@ -32,17 +32,16 @@ public class Audience implements Serializable {
     @Setter
     private Integer capacity;
 
+    @Getter
+    @Setter
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("audiences")
     @Getter
     @Setter
     private Category category;
-
-
-    @Getter
-    @Setter
-    private String description;
 
     @Getter
     @Setter
