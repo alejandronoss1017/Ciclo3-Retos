@@ -46,6 +46,10 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "idClient")
     private Client client;
 
+    @Getter
+    @Setter
+    private Integer score;
+
     // @Getter
     // @Setter
     // @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "reservation")
