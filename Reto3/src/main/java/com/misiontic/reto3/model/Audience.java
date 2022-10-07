@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "audience")
@@ -27,8 +28,8 @@ public class Audience implements Serializable {
     @Setter
     private Integer capacity;
 
-    //! Error Critico a la hora de enlazar 
-    //! Las llaves foraneas
+    // ! Error Critico a la hora de enlazar
+    // ! Las llaves foraneas
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("audiences")
@@ -46,16 +47,14 @@ public class Audience implements Serializable {
 
     @Getter
     @Setter
-    @ManyToOne
-    @JoinColumn(name = "idMessage", nullable = true)
+    @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "audience")
     @JsonIgnoreProperties("audience")
-    private Message message;
+    private List<Message> messages;
 
-    @ManyToOne
-    @JoinColumn(name = "idAudience")
-    @JsonIgnoreProperties("audience")
     @Getter
     @Setter
-    private Reservation reservation;
+    @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "audience")
+    @JsonIgnoreProperties("audience")
+    private List<Reservation> reservations;
 
 }

@@ -19,12 +19,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "category")
 public class Category implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Integer idCategory;
+    private Integer id;
 
     @Getter
     @Setter
@@ -40,10 +40,11 @@ public class Category implements Serializable {
     @JsonIgnoreProperties("category")
     private List<Audience> audiences;
 
+    // @ManyToOne
+    // @JoinColumn(name = "idReservation")
+    // @JsonIgnoreProperties("category")
     // @Getter
     // @Setter
-    // @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "category")
-    // @JsonIgnoreProperties("category")
-    // private List<Reservation> reservations;
+    // private Reservation reservation;
 
 }

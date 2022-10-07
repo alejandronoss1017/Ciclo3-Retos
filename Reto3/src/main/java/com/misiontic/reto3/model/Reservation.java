@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "reservation")
@@ -33,24 +32,23 @@ public class Reservation implements Serializable {
     @Setter
     private String status;
 
-    @ManyToOne
-    @JsonIgnoreProperties("reservation")
     @Getter
     @Setter
+    @ManyToOne
+    @JoinColumn(name = "audienceId")
+    @JsonIgnoreProperties({ "reservations", "messages" })
     private Audience audience;
 
-    @ManyToOne
-    @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties("reservations")
     @Getter
     @Setter
+    @ManyToOne
+    @JsonIgnoreProperties("reservations")
+    @JoinColumn(name = "idClient")
     private Client client;
 
-
-    // @ManyToOne
-    // @JoinColumn(name = "idCategory")
-    // @JsonIgnoreProperties("reservation")
     // @Getter
     // @Setter
-    // private Category category;
+    // @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "reservation")
+    // @JsonIgnoreProperties("reservatiom")
+    // private List<Category> categories;
 }
