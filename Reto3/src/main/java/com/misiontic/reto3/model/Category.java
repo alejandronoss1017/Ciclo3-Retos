@@ -28,11 +28,11 @@ public class Category implements Serializable {
 
     @Getter
     @Setter
-    private String description;
-
+    private String name;
+    
     @Getter
     @Setter
-    private String name;
+    private String description;
 
     @Getter
     @Setter

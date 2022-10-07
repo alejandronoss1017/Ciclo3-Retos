@@ -19,7 +19,11 @@ public class Audience implements Serializable {
     @Getter
     @Setter
     private Integer id;
-
+    
+    @Getter
+    @Setter
+    private String name;
+    
     @Getter
     @Setter
     private String owner;
@@ -28,8 +32,6 @@ public class Audience implements Serializable {
     @Setter
     private Integer capacity;
 
-    // ! Error Critico a la hora de enlazar
-    // ! Las llaves foraneas
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("audiences")
@@ -37,9 +39,6 @@ public class Audience implements Serializable {
     @Setter
     private Category category;
 
-    @Getter
-    @Setter
-    private String name;
 
     @Getter
     @Setter
