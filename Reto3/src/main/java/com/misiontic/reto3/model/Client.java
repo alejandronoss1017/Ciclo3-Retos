@@ -24,11 +24,12 @@ public class Client implements Serializable {
 
 	@Getter
 	@Setter
-	private String name;
-
+	private String password;
+	
 	@Getter
 	@Setter
-	private String password;
+	private String name;
+
 
 	@Getter
 	@Setter
