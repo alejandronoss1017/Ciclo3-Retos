@@ -30,7 +30,7 @@ public class Reservation implements Serializable {
 
     @Getter
     @Setter
-    private String status;
+    private String status = "created";
 
     @Getter
     @Setter
