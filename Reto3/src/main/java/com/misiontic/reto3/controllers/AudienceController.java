@@ -40,7 +40,7 @@ class AudienceController {
         return audienceService.save(audience);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Boolean delete(@PathVariable("id") Integer id) {
         return audienceService.delete(id);
     }
