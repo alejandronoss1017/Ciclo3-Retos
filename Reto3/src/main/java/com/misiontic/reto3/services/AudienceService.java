@@ -43,6 +43,8 @@ public class AudienceService {
             if (q.isPresent()) {
                 if (audience.getName() != null) {
                     q.get().setName(audience.getName());
+                    q.get().setOwner(audience.getOwner());
+                    audience.setCapacity(audience.getCapacity());
                 }
                 audienceRepository.save(q.get());
                 return q.get();
