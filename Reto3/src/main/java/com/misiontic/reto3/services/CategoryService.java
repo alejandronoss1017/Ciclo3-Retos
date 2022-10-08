@@ -43,6 +43,8 @@ public class CategoryService {
             if (q.isPresent()) {
                 if (p.getName() != null) {
                     q.get().setName(p.getName());
+                }
+                if (p.getDescription() != null) {
                     q.get().setDescription(p.getDescription());
                 }
                 categoryRepository.save(q.get());

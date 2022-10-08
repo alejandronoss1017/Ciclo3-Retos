@@ -38,7 +38,7 @@ public class ReservationController {
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservation update(@RequestBody Reservation c) {
-        return reservationService.save(c);
+        return reservationService.update(c);
     }
 
     @DeleteMapping("/delete/{id}")

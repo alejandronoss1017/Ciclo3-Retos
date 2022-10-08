@@ -36,20 +36,29 @@ public class ClientService {
         }
     }
 
-    public Client update(Client p) {
-        if (p.getIdClient() != null) {
-            Optional<Client> q = clientRepository.getClient(p.getIdClient());
+    public Client update(Client client) {
+        if (client.getIdClient() != null) {
+            Optional<Client> q = clientRepository.getClient(client.getIdClient());
             if (q.isPresent()) {
-                if (p.getName() != null) {
-                    q.get().setName(p.getName());
+                if (client.getEmail() != null) {
+                    q.get().setEmail(client.getEmail());
+                }
+                if (client.getPassword() != null) {
+                    q.get().setPassword(client.getPassword());
+                }
+                if (client.getName() != null) {
+                    q.get().setName(client.getName());
+                }
+                if (client.getAge() != null) {
+                    q.get().setAge(client.getAge());
                 }
                 clientRepository.save(q.get());
                 return q.get();
             } else {
-                return p;
+                return client;
             }
         } else {
-            return p;
+            return client;
         }
     }
 
