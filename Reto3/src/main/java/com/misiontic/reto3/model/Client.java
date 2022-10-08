@@ -39,7 +39,7 @@ public class Client implements Serializable {
 	@Setter
 	@OneToMany
 	@JoinColumn(name = "idMessage")
-	@JsonIgnoreProperties("client")
+	@JsonIgnoreProperties({"client","message"})
 	private List<Message> messages;
 
 	@Getter
