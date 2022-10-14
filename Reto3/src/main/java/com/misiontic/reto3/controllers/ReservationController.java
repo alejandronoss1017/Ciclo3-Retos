@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 import com.misiontic.reto3.model.Reservation;
+import com.misiontic.reto3.model.DTO.CompletedAndCancelled;
+import com.misiontic.reto3.model.DTO.TotalAndClient;
 import com.misiontic.reto3.services.ReservationService;
 
 @RestController
@@ -45,5 +47,20 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Boolean delete(@PathVariable("id") Integer id) {
         return reservationService.delete(id);
+    }
+
+    @GetMapping("/report-dates/{dateA}/{dateB}")
+    public List<Reservation> reportDates(@PathVariable("dateA") String dateA, @PathVariable("dateB") String dateB) {
+        return reservationService.getReservationsBetweenDatesReport(dateA, dateB);
+    }
+
+    @GetMapping("/report-status")
+    public CompletedAndCancelled getReservationStatusReport() {
+        return reservationService.getReservationStatusReport();
+    }
+
+    @GetMapping("/report-clients")
+    public List<TotalAndClient> getTopClientsReport() {
+        return reservationService.getTopClientsReport();
     }
 }

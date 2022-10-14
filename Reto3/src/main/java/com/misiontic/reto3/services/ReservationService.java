@@ -1,5 +1,9 @@
 package com.misiontic.reto3.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.misiontic.reto3.repository.ReservationRespository;
 import com.misiontic.reto3.model.Reservation;
+import com.misiontic.reto3.model.DTO.CompletedAndCancelled;
+import com.misiontic.reto3.model.DTO.TotalAndClient;
 
 @Service
 public class ReservationService {
@@ -73,5 +79,38 @@ public class ReservationService {
         }
         return flag;
 
+    }
+
+    public List<Reservation> getReservationsBetweenDatesReport(String dateA, String dateB) {
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        Date a = new Date();
+        Date b = new Date();
+        try {
+            a = parser.parse(dateA);
+            b = parser.parse(dateB);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (a.before(b)) {
+            return reservationRespository.getReservationsBetweenDates(a, b);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public CompletedAndCancelled getReservationStatusReport() {
+
+        List<Reservation> completed = reservationRespository.findAllByStatus("completed");
+        List<Reservation> cancelled = reservationRespository.findAllByStatus("cancelled");
+
+        Integer amountCompleted = completed.size();
+        Integer amountCancelled = cancelled.size();
+
+        return new CompletedAndCancelled(amountCompleted, amountCancelled);
+    }
+
+    public List<TotalAndClient> getTopClientsReport() {
+        return reservationRespository.getTopClients();
     }
 }
